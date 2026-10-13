@@ -198,6 +198,9 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
 .track-label{font-family:var(--display);font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
 .player{width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:radial-gradient(ellipse at 50% 30%,#4a2c10,#0f0904 75%);box-shadow:0 14px 40px rgba(0,0,0,.6),0 0 40px rgba(255,170,70,.18)}
 .player iframe{width:100%;height:100%;border:0;display:block}
+.track.tap .player{animation:tapGlow 1.4s ease-in-out infinite}
+@keyframes tapGlow{50%{box-shadow:0 0 0 3px var(--gold-hi),0 0 44px rgba(255,190,90,.75)}}
+.track-hint{font-style:italic;color:var(--gold-hi);font-size:1.1rem}
 .player-start{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:16px;background:none;border:0;cursor:pointer;color:var(--parch);font-family:var(--display);text-align:left}
 .player-start i{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:linear-gradient(180deg,#f6dc93,#b07a2c);color:#1d1004;font-style:normal;font-size:1.3rem;box-shadow:0 0 26px rgba(255,190,90,.55)}
 .player-start span{font-weight:700;font-size:1.15rem;letter-spacing:.06em}
@@ -260,7 +263,8 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
     </div>
     <div class="track" id="track" hidden>
       <span class="track-label">Canción del retiro</span>
-      <div class="player" id="player"><button class="player-start" id="playerStart" type="button"><i>▶</i><span>Déjame Sanarte<small>Miguel Cruz</small></span></button></div>
+      <div class="player" id="player"></div>
+      <p class="track-hint" id="trackHint" hidden>Toca ▶ en el video para escuchar la canción</p>
     </div>
   </div>
 </header>
@@ -454,38 +458,53 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
     try{navigator.clipboard.writeText(url).then(ok,fail);}catch(e){fail();}
   });
 
-  // Song: "Déjame Sanarte" through YouTube's own player, shown in the hero; link out where embedding is not allowed
+  // Song: "Déjame Sanarte" through YouTube's own player in the hero. The button only says "Pausar"
+  // once YouTube reports it is playing; if the browser blocks autoplay, point the guest at the player.
   var song=document.getElementById('song'),lbl=document.getElementById('songlbl'),track=document.getElementById('track'),
-      player=document.getElementById('player'),splash=document.getElementById('splash'),iframe=null,playing=false;
-  var OFF='Escuchar “Déjame Sanarte”',ON='Pausar canción';
-  function setOn(on){playing=on;song.classList.toggle('on',on);lbl.textContent=on?ON:OFF;}
+      player=document.getElementById('player'),hint=document.getElementById('trackHint'),splash=document.getElementById('splash'),
+      iframe=null,ready=false,want=false,playing=false,checkT=null;
+  var OFF='Escuchar “Déjame Sanarte”';
+  function label(t){lbl.textContent=t;}
+  function setOn(on){playing=on;song.classList.toggle('on',on);label(on?'Pausar canción':OFF);if(on){track.classList.remove('tap');hint.hidden=true;}}
   function cmd(f){if(iframe)iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:f,args:[]}),'*');}
   function load(){
     iframe=document.createElement('iframe');
-    iframe.src='https://www.youtube-nocookie.com/embed/eK78zMyFTAQ?autoplay=1&loop=1&playlist=eK78zMyFTAQ&rel=0&playsinline=1&enablejsapi=1&origin='+encodeURIComponent(location.origin);
+    iframe.src='https://www.youtube-nocookie.com/embed/eK78zMyFTAQ?loop=1&playlist=eK78zMyFTAQ&rel=0&playsinline=1&enablejsapi=1&origin='+encodeURIComponent(location.origin);
     iframe.title='Déjame Sanarte · Miguel Cruz';
     iframe.allow='autoplay; encrypted-media; picture-in-picture';
     iframe.allowFullscreen=true;
-    iframe.addEventListener('load',function(){iframe.contentWindow.postMessage(JSON.stringify({event:'listening',id:'song'}),'*');});
-    player.innerHTML='';player.appendChild(iframe);setOn(true);
+    iframe.addEventListener('load',function(){iframe.contentWindow.postMessage(JSON.stringify({event:'listening',id:'song',channel:'widget'}),'*');});
+    player.appendChild(iframe);
+  }
+  function needTap(){
+    if(playing)return;
+    track.classList.add('tap');hint.hidden=false;label('Toca ▶ para escuchar');
+    track.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  function play(){
+    want=true;label('Cargando canción…');
+    if(ready)cmd('playVideo');
+    clearTimeout(checkT);checkT=setTimeout(needTap,3000);
   }
   window.addEventListener('message',function(e){
     if(!/youtube/.test(e.origin))return;
-    try{var m=JSON.parse(e.data),st=m.event==='onStateChange'?m.info:(m.info&&m.info.playerState);
-      if(st===1)setOn(true);else if(st===2||st===0)setOn(false);}catch(x){}
+    try{var m=JSON.parse(e.data);
+      if(m.event==='onReady'||(m.event==='initialDelivery')){if(!ready){ready=true;if(want&&!playing)cmd('playVideo');}}
+      var st=m.event==='onStateChange'?m.info:(m.info&&m.info.playerState);
+      if(st===1)setOn(true);else if((st===2||st===0)&&playing)setOn(false);
+    }catch(x){}
   });
   if(/(invitados\.org|github\.io)$/.test(location.hostname)){
-    track.hidden=false;
-    document.getElementById('playerStart').addEventListener('click',load);
+    track.hidden=false;load();
     song.addEventListener('click',function(e){
       e.preventDefault();
-      if(!iframe)load();else if(playing){cmd('pauseVideo');setOn(false);}else{cmd('playVideo');setOn(true);}
+      if(playing){want=false;cmd('pauseVideo');setOn(false);}else play();
     });
     splash.hidden=false;document.body.style.overflow='hidden';
     document.getElementById('openInvitation').addEventListener('click',function(){
       splash.classList.add('out');document.body.style.overflow='';
       setTimeout(function(){splash.hidden=true;},900);
-      if(!iframe)load();
+      play();
     });
   }
 
