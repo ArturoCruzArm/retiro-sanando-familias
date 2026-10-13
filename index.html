@@ -197,6 +197,15 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
 .player{width:min(300px,calc(100vw - 32px));aspect-ratio:16/9;border:1px solid var(--gold);background:#000;box-shadow:0 10px 30px rgba(0,0,0,.6)}
 .player iframe{width:100%;height:100%;border:0;display:block}
 
+.splash{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px;text-align:center;
+  background:radial-gradient(ellipse 70% 60% at 50% 40%,#4a2c10,var(--coal) 75%);transition:opacity .9s ease}
+.splash.out{opacity:0;pointer-events:none}
+.splash-in{display:flex;flex-direction:column;align-items:center;gap:12px}
+.splash-title{display:flex;flex-direction:column;font-family:var(--display);font-weight:900;line-height:.95}
+.splash-title .gold-text{font-size:clamp(2.6rem,12vw,5rem)}
+.splash-title .silver-text{font-size:clamp(2.2rem,10.5vw,4.4rem)}
+.splash p{color:var(--muted);font-style:italic;margin-bottom:10px}
+
 @media (max-width:760px){
   .stage{grid-template-columns:1fr 1fr;padding-inline:16px;gap:12px}
   .scene{grid-column:1/-1;grid-row:1}
@@ -394,6 +403,17 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
   </div>
 </footer>
 
+<div class="splash" id="splash" hidden>
+  <div class="splash-in">
+    <img class="seal" src="img/escudo.png" alt="" width="300" height="300">
+    <span class="script">Taller Retiro</span>
+    <div class="splash-title"><span class="gold-text">SANANDO</span><span class="silver-text">FAMILIAS</span></div>
+    <p>28 y 29 de noviembre de 2026</p>
+    <button class="btn btn-gold" id="openInvitation" type="button">Abrir invitación</button>
+  </div>
+</div>
+
+<audio id="bgMusic" loop preload="auto"><source src="musica-fondo.mp3" type="audio/mpeg"></audio>
 <div class="song">
   <div class="player" id="player" hidden></div>
   <a class="song-btn" id="song" href="https://youtu.be/eK78zMyFTAQ" target="_blank" rel="noopener"><i>♪</i><span id="songlbl">Escuchar “Déjame Sanarte”</span></a>
@@ -426,17 +446,35 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
     try{navigator.clipboard.writeText(url).then(ok,fail);}catch(e){fail();}
   });
 
-  // Song: embedded player on the invitation's own site, link out elsewhere
+  // Song: background mp3 on the invitation's own site (YouTube player if the mp3 is missing), link out elsewhere
   var song=document.getElementById('song'),player=document.getElementById('player'),lbl=document.getElementById('songlbl');
+  var audio=document.getElementById('bgMusic'),hasMp3=true,splash=document.getElementById('splash');
+  var OFF='Escuchar “Déjame Sanarte”',ON='Pausar música';
+  audio.volume=0.4;
+  audio.addEventListener('error',function(){hasMp3=false;},true);
+  audio.querySelector('source').addEventListener('error',function(){hasMp3=false;});
+  function setOn(on){song.classList.toggle('on',on);lbl.textContent=on?ON:OFF;}
+  function playMp3(){return audio.play().then(function(){setOn(true);},function(){hasMp3=false;});}
+  function toggleYouTube(){
+    if(player.hidden){
+      player.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/eK78zMyFTAQ?autoplay=1&rel=0" title="Déjame Sanarte" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+      player.hidden=false;song.classList.add('on');lbl.textContent='Cerrar canción';
+    }else{
+      player.innerHTML='';player.hidden=true;setOn(false);
+    }
+  }
   if(/(invitados\.org|github\.io)$/.test(location.hostname)){
     song.addEventListener('click',function(e){
       e.preventDefault();
-      if(player.hidden){
-        player.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/eK78zMyFTAQ?autoplay=1&rel=0" title="Déjame Sanarte" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
-        player.hidden=false;song.classList.add('on');lbl.textContent='Cerrar canción';
-      }else{
-        player.innerHTML='';player.hidden=true;song.classList.remove('on');lbl.textContent='Escuchar “Déjame Sanarte”';
-      }
+      if(!hasMp3){toggleYouTube();return;}
+      if(audio.paused){playMp3().then(function(){if(!hasMp3)toggleYouTube();});}
+      else{audio.pause();setOn(false);}
+    });
+    splash.hidden=false;document.body.style.overflow='hidden';
+    document.getElementById('openInvitation').addEventListener('click',function(){
+      splash.classList.add('out');document.body.style.overflow='';
+      setTimeout(function(){splash.hidden=true;},900);
+      (hasMp3?playMp3():Promise.resolve()).then(function(){if(!hasMp3)toggleYouTube();});
     });
   }
 
