@@ -194,8 +194,14 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
 .song-btn i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(180deg,#f6dc93,#b07a2c);color:#1d1004;font-style:normal;font-size:.9rem}
 .song-btn.on i{animation:beat 1.2s ease-in-out infinite}
 @keyframes beat{50%{transform:scale(1.12)}}
-.player{width:min(300px,calc(100vw - 32px));aspect-ratio:16/9;border:1px solid var(--gold);background:#000;box-shadow:0 10px 30px rgba(0,0,0,.6)}
+.track{width:min(100%,26rem);margin-top:24px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.track-label{font-family:var(--display);font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.player{width:100%;aspect-ratio:16/9;border:1px solid var(--gold);background:radial-gradient(ellipse at 50% 30%,#4a2c10,#0f0904 75%);box-shadow:0 14px 40px rgba(0,0,0,.6),0 0 40px rgba(255,170,70,.18)}
 .player iframe{width:100%;height:100%;border:0;display:block}
+.player-start{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:16px;background:none;border:0;cursor:pointer;color:var(--parch);font-family:var(--display);text-align:left}
+.player-start i{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:linear-gradient(180deg,#f6dc93,#b07a2c);color:#1d1004;font-style:normal;font-size:1.3rem;box-shadow:0 0 26px rgba(255,190,90,.55)}
+.player-start span{font-weight:700;font-size:1.15rem;letter-spacing:.06em}
+.player-start small{display:block;font-family:var(--script);font-weight:400;font-size:1.6rem;letter-spacing:0;color:var(--gold-hi)}
 
 .splash{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px;text-align:center;
   background:radial-gradient(ellipse 70% 60% at 50% 40%,#4a2c10,var(--coal) 75%);transition:opacity .9s ease}
@@ -251,6 +257,10 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
     <div class="cta-row">
       <a class="btn btn-gold" href="#informes">Quiero asistir</a>
       <a class="btn btn-ghost" href="#fechas">Fechas y lugar</a>
+    </div>
+    <div class="track" id="track" hidden>
+      <span class="track-label">Canción del retiro</span>
+      <div class="player" id="player"><button class="player-start" id="playerStart" type="button"><i>▶</i><span>Déjame Sanarte<small>Miguel Cruz</small></span></button></div>
     </div>
   </div>
 </header>
@@ -413,9 +423,7 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
   </div>
 </div>
 
-<audio id="bgMusic" loop preload="auto"><source src="musica-fondo.mp3" type="audio/mpeg"></audio>
 <div class="song">
-  <div class="player" id="player" hidden></div>
   <a class="song-btn" id="song" href="https://youtu.be/eK78zMyFTAQ" target="_blank" rel="noopener"><i>♪</i><span id="songlbl">Escuchar “Déjame Sanarte”</span></a>
 </div>
 
@@ -446,35 +454,38 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
     try{navigator.clipboard.writeText(url).then(ok,fail);}catch(e){fail();}
   });
 
-  // Song: background mp3 on the invitation's own site (YouTube player if the mp3 is missing), link out elsewhere
-  var song=document.getElementById('song'),player=document.getElementById('player'),lbl=document.getElementById('songlbl');
-  var audio=document.getElementById('bgMusic'),hasMp3=true,splash=document.getElementById('splash');
-  var OFF='Escuchar “Déjame Sanarte”',ON='Pausar música';
-  audio.volume=0.4;
-  audio.addEventListener('error',function(){hasMp3=false;},true);
-  audio.querySelector('source').addEventListener('error',function(){hasMp3=false;});
-  function setOn(on){song.classList.toggle('on',on);lbl.textContent=on?ON:(hasMp3?'Escuchar música':OFF);}
-  function playMp3(){return audio.play().then(function(){setOn(true);},function(){hasMp3=false;});}
-  function toggleYouTube(){
-    if(player.hidden){
-      player.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/eK78zMyFTAQ?autoplay=1&rel=0" title="Déjame Sanarte" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
-      player.hidden=false;song.classList.add('on');lbl.textContent='Cerrar canción';
-    }else{
-      player.innerHTML='';player.hidden=true;setOn(false);
-    }
+  // Song: "Déjame Sanarte" through YouTube's own player, shown in the hero; link out where embedding is not allowed
+  var song=document.getElementById('song'),lbl=document.getElementById('songlbl'),track=document.getElementById('track'),
+      player=document.getElementById('player'),splash=document.getElementById('splash'),iframe=null,playing=false;
+  var OFF='Escuchar “Déjame Sanarte”',ON='Pausar canción';
+  function setOn(on){playing=on;song.classList.toggle('on',on);lbl.textContent=on?ON:OFF;}
+  function cmd(f){if(iframe)iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:f,args:[]}),'*');}
+  function load(){
+    iframe=document.createElement('iframe');
+    iframe.src='https://www.youtube-nocookie.com/embed/eK78zMyFTAQ?autoplay=1&loop=1&playlist=eK78zMyFTAQ&rel=0&playsinline=1&enablejsapi=1&origin='+encodeURIComponent(location.origin);
+    iframe.title='Déjame Sanarte · Miguel Cruz';
+    iframe.allow='autoplay; encrypted-media; picture-in-picture';
+    iframe.allowFullscreen=true;
+    iframe.addEventListener('load',function(){iframe.contentWindow.postMessage(JSON.stringify({event:'listening',id:'song'}),'*');});
+    player.innerHTML='';player.appendChild(iframe);setOn(true);
   }
+  window.addEventListener('message',function(e){
+    if(!/youtube/.test(e.origin))return;
+    try{var m=JSON.parse(e.data),st=m.event==='onStateChange'?m.info:(m.info&&m.info.playerState);
+      if(st===1)setOn(true);else if(st===2||st===0)setOn(false);}catch(x){}
+  });
   if(/(invitados\.org|github\.io)$/.test(location.hostname)){
+    track.hidden=false;
+    document.getElementById('playerStart').addEventListener('click',load);
     song.addEventListener('click',function(e){
       e.preventDefault();
-      if(!hasMp3){toggleYouTube();return;}
-      if(audio.paused){playMp3().then(function(){if(!hasMp3)toggleYouTube();});}
-      else{audio.pause();setOn(false);}
+      if(!iframe)load();else if(playing){cmd('pauseVideo');setOn(false);}else{cmd('playVideo');setOn(true);}
     });
     splash.hidden=false;document.body.style.overflow='hidden';
     document.getElementById('openInvitation').addEventListener('click',function(){
       splash.classList.add('out');document.body.style.overflow='';
       setTimeout(function(){splash.hidden=true;},900);
-      (hasMp3?playMp3():Promise.resolve()).then(function(){if(!hasMp3)toggleYouTube();});
+      if(!iframe)load();
     });
   }
 
