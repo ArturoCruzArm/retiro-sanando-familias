@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taller Retiro · Sanando Familias</title>
+<meta name="description" content="Taller Retiro Sanando Familias. 28 y 29 de noviembre de 2026, Comunidad de El Capulín, Dolores Hidalgo, Gto. Imparten Pbro. Rubén Pérez y Psicól. Cecilia Balderas.">
+<meta name="theme-color" content="#0f0904">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://retiro-sanando-familias.invitados.org/">
+<meta property="og:title" content="Taller Retiro · Sanando Familias">
+<meta property="og:description" content="Orar · Sanar · Liberar · Renovar. 28 y 29 de noviembre de 2026 en El Capulín, Dolores Hidalgo, Gto.">
+<meta property="og:image" content="https://retiro-sanando-familias.invitados.org/img/portada.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="628">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+/* Layout: cinematic "Déjame Sanarte" poster language. Candle-dark ground, a glowing family scene with embers, metallic gold/silver title, corner whispers; then dark chapters lit like a chapel, a sunset-cross turning point, and a floating song button. Single committed dark look. */
+:root{
+  --coal:#0f0904;
+  --umber:#1c1209;
+  --bronze:#3a2410;
+  --gold:#d4a54a;
+  --gold-hi:#f6dc93;
+  --ember:#ff9c3a;
+  --wine:#8e1f1f;
+  --parch:#efe3c8;
+  --muted:#b9a582;
+  --display:'Cinzel','Trajan Pro',Georgia,serif;
+  --text:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --script:'Pinyon Script','Snell Roundhand','Brush Script MT',cursive;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--coal)}
+body{background:var(--coal);color:var(--parch);font-family:var(--text);font-size:1.25rem;line-height:1.55;margin:0;overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.wrap{width:min(100%,64rem);margin-inline:auto;padding-inline:20px}
+
+/* metallic type, as on the song cover */
+.gold-text,.silver-text{-webkit-background-clip:text;background-clip:text;color:transparent;background-size:250% 100%,100% 100%;animation:shine 7s ease-in-out infinite}
+.gold-text{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.85) 50%,transparent 58%),linear-gradient(180deg,#fff4c8 0%,#f2cd6a 32%,#a8701c 54%,#f6d67a 74%,#7a4e12 100%);
+  filter:drop-shadow(0 2px 0 #2a1704) drop-shadow(0 0 22px rgba(255,180,80,.45))}
+.silver-text{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.9) 50%,transparent 58%),linear-gradient(180deg,#ffffff 0%,#ece8de 38%,#8f897e 55%,#f6f3ec 72%,#6f695f 100%);
+  -webkit-text-stroke:1px rgba(212,165,74,.85);filter:drop-shadow(0 2px 0 #2a1704) drop-shadow(0 0 18px rgba(255,200,120,.35))}
+@keyframes shine{0%,55%{background-position:120% 0,0 0}85%,100%{background-position:-120% 0,0 0}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;text-align:center;padding-block:24px 64px;
+  background:radial-gradient(ellipse 80% 55% at 50% 30%,#4a2c10 0%,#22140a 45%,var(--coal) 80%)}
+.rays{position:absolute;left:50%;top:-30%;width:200vmax;height:200vmax;translate:-50% -50%;pointer-events:none;opacity:.55;
+  background:repeating-conic-gradient(from 160deg,rgba(255,214,140,.22) 0deg 3deg,rgba(255,214,140,0) 3deg 11deg);
+  -webkit-mask:radial-gradient(circle,#000 0,transparent 40%);mask:radial-gradient(circle,#000 0,transparent 40%);
+  animation:sway 18s ease-in-out infinite alternate}
+@keyframes sway{to{rotate:6deg}}
+#embers{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.topline,.stage,.titleblock{position:relative}
+.topline{display:flex;flex-direction:column;align-items:center;gap:10px;z-index:4}
+.seal{width:clamp(78px,18vw,104px);height:auto;border-radius:50%;box-shadow:0 0 0 2px var(--gold),0 0 30px rgba(255,190,90,.55)}
+.org{font-family:var(--display);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-hi)}
+.org b{font-weight:700;color:var(--parch)}
+
+.stage{display:grid;grid-template-columns:1fr minmax(0,40rem) 1fr;align-items:start;gap:16px;margin-top:18px;padding-inline:20px;z-index:2}
+.scene{grid-column:2;margin:0;position:relative}
+.scene img{display:block;width:100%;height:auto;
+  -webkit-mask:radial-gradient(ellipse 72% 70% at 50% 46%,#000 52%,transparent 100%);mask:radial-gradient(ellipse 72% 70% at 50% 46%,#000 52%,transparent 100%);
+  filter:sepia(.18) saturate(1.15) contrast(1.06);animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.09) translateY(-2%)}}
+.whisper{font-family:var(--display);font-size:.72rem;line-height:1.55;letter-spacing:.14em;text-transform:uppercase;color:var(--parch);text-align:left;max-width:13rem;margin-top:12%}
+.whisper::after{content:"";display:block;width:3.5rem;height:1px;margin-top:10px;background:linear-gradient(90deg,var(--gold),transparent)}
+.whisper.r{text-align:right;justify-self:end}
+.whisper.r::after{margin-left:auto;background:linear-gradient(270deg,var(--gold),transparent)}
+.whisper.l{grid-column:1;grid-row:1;justify-self:end}
+.whisper.r{grid-column:3;grid-row:1;justify-self:start}
+
+.titleblock{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:-56px;z-index:4;padding-inline:16px}
+.mini-cross{width:22px;height:auto;filter:drop-shadow(0 0 8px rgba(255,200,110,.9))}
+.script{font-family:var(--script);font-size:clamp(2rem,7vw,3rem);line-height:1;color:var(--gold-hi);text-shadow:0 0 18px rgba(255,190,90,.5)}
+h1{display:flex;flex-direction:column;line-height:.95;font-weight:900;letter-spacing:.02em}
+h1 .gold-text{font-size:clamp(3rem,13vw,7.2rem)}
+h1 .silver-text{font-size:clamp(2.6rem,11.5vw,6.4rem)}
+.swash{width:min(80%,26rem);height:14px;margin-top:2px}
+.motto{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;font-family:var(--display);font-size:clamp(.74rem,2.5vw,.95rem);letter-spacing:.3em;text-transform:uppercase;color:var(--gold-hi);margin-top:4px}
+.motto span+span::before{content:"✦";margin-right:16px;color:var(--gold);font-size:.7em;vertical-align:middle}
+.quote{max-width:32ch;font-style:italic;font-size:clamp(1.25rem,3.6vw,1.55rem);color:var(--parch);margin-top:10px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.85rem;text-decoration:none;
+  padding:15px 26px;border-radius:2px;border:1px solid var(--gold);cursor:pointer;transition:transform .2s,box-shadow .2s;background:none;color:var(--parch)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(255,170,70,.25)}
+.btn-gold{background:linear-gradient(180deg,#f6dc93,#c08a35 60%,#8f5f1c);color:#1d1004;border-color:#f6dc93}
+.btn-ghost{background:rgba(15,9,4,.5);color:var(--gold-hi)}
+
+/* ---------- CHAPTERS ---------- */
+section{padding-block:76px;position:relative}
+.eyebrow{font-family:var(--display);font-size:.76rem;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);text-align:center}
+h2{font-size:clamp(1.8rem,6vw,3rem);font-weight:900;text-align:center;margin-top:10px;letter-spacing:.03em}
+.orn{display:flex;align-items:center;gap:14px;justify-content:center;margin:18px auto 0;max-width:20rem}
+.orn::before,.orn::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn::after{transform:scaleX(-1)}
+.orn svg{width:16px;height:auto}
+.orn .heart{width:34px}
+
+.chapel{background:radial-gradient(ellipse 60% 70% at 50% 50%,#2a1a0c,var(--coal) 75%);text-align:center;overflow:hidden}
+.candles{display:flex;justify-content:space-between;align-items:flex-end;position:absolute;inset:auto 0 40px;padding-inline:4vw;pointer-events:none}
+.candle{width:clamp(34px,6vw,54px);height:auto;opacity:.95}
+.flame{transform-origin:50% 100%;animation:flicker 2.6s ease-in-out infinite}
+.candle.r .flame{animation-delay:-1.3s}
+.glow{animation:glow 2.6s ease-in-out infinite}
+@keyframes flicker{0%,100%{transform:scale(1,1) rotate(0)}25%{transform:scale(.92,1.08) rotate(-2deg)}50%{transform:scale(1.05,.94) rotate(1.5deg)}75%{transform:scale(.96,1.04) rotate(-1deg)}}
+@keyframes glow{50%{opacity:.7}}
+.chapel blockquote{margin:0 auto;max-width:24ch;font-size:clamp(1.6rem,5vw,2.4rem);font-style:italic;font-weight:600;line-height:1.3;color:var(--parch);text-shadow:0 0 30px rgba(255,170,70,.25)}
+.chapel .intro{max-width:44ch;margin:30px auto 0;color:var(--muted)}
+.chapel .wrap{position:relative;z-index:1;padding-inline:clamp(20px,12vw,140px)}
+
+.dates{display:grid;grid-template-columns:1fr 1fr;margin-top:40px;border:1px solid rgba(212,165,74,.6);background:linear-gradient(180deg,rgba(58,36,16,.45),rgba(15,9,4,.6))}
+.date{padding:34px 18px;text-align:center;display:flex;flex-direction:column;gap:6px;min-width:0}
+.date+.date{border-left:1px solid rgba(212,165,74,.6)}
+.date .lbl{font-family:var(--display);letter-spacing:.32em;font-size:.8rem;text-transform:uppercase;color:var(--gold)}
+.date .day{font-family:var(--display);font-weight:900;font-size:clamp(3.6rem,13vw,6rem);line-height:1}
+.date .mon{font-family:var(--display);font-size:clamp(.9rem,3vw,1.15rem);letter-spacing:.2em;text-transform:uppercase}
+.date .hr{font-size:1.5rem;font-weight:600;color:var(--gold-hi)}
+.count{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:28px}
+.count div{min-width:84px;text-align:center;padding:14px 8px;border:1px solid rgba(212,165,74,.45);background:rgba(28,18,9,.8)}
+.count strong{display:block;font-family:var(--display);font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--gold-hi)}
+.count span{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-family:var(--display);color:var(--muted)}
+.count-note{text-align:center;margin-top:12px;color:var(--muted);font-style:italic}
+
+.pillars{background:linear-gradient(180deg,var(--coal),var(--umber) 50%,var(--coal))}
+.pil-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:40px}
+.pil{padding:26px 22px;border-top:1px solid var(--gold);background:linear-gradient(180deg,rgba(212,165,74,.08),transparent)}
+.pil h3{font-size:1.1rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-hi)}
+.pil p{margin-top:8px;color:var(--muted);font-size:1.12rem}
+
+.bring{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:4px 40px;list-style:none;padding:0;margin:40px auto 0;max-width:46rem}
+.bring li{display:flex;gap:14px;align-items:center;font-size:1.35rem;padding-block:12px;border-bottom:1px solid rgba(212,165,74,.3)}
+.bring svg{flex:none;width:22px;height:22px}
+
+.who{background:radial-gradient(ellipse 70% 80% at 50% 0,#3a2410,var(--coal) 70%)}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:40px}
+.person{text-align:center;padding:30px 20px;border:1px solid rgba(212,165,74,.55);background:rgba(15,9,4,.55)}
+.person small{display:block;font-family:var(--script);font-size:1.9rem;line-height:1;color:var(--gold-hi)}
+.person strong{display:block;font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,4vw,1.7rem);margin-top:8px;letter-spacing:.06em}
+
+/* sunset cross on the hill */
+.dawn{padding-block:80px 0;overflow:hidden;text-align:center;
+  background:linear-gradient(180deg,var(--coal) 0%,#2a150a 30%,#6e3212 55%,#c86b22 70%,#f4b04a 78%,#ffd98a 81%,#2a170b 100%)}
+.dawn .wrap{position:relative;z-index:2}
+.dawn h2{font-size:clamp(2rem,7vw,3.6rem)}
+.dawn .lead{max-width:30ch;margin:16px auto 0;font-size:clamp(1.3rem,4vw,1.7rem);font-style:italic;color:var(--parch)}
+.dawn blockquote{margin:28px auto 0;max-width:34ch;font-size:1.2rem;color:var(--parch);opacity:.92}
+.dawn cite{display:block;margin-top:8px;font-family:var(--display);font-style:normal;font-size:.76rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-hi)}
+.hill{display:block;width:100%;height:clamp(240px,42vw,420px);margin-top:-10px}
+.sun{animation:pulse 6s ease-in-out infinite;transform-origin:640px 250px}
+@keyframes pulse{50%{opacity:.8;transform:scale(1.06)}}
+.sprout{transform-origin:820px 372px;animation:grow 5s ease-in-out infinite alternate}
+@keyframes grow{to{transform:rotate(-4deg) scale(1.04)}}
+
+.where{text-align:center;background:#1a0f07}
+.place{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));border:1px solid rgba(212,165,74,.6)}
+.place>div{padding:30px 22px;min-width:0}
+.place>div+div{border-left:1px solid rgba(212,165,74,.6)}
+.place .lbl{font-family:var(--display);letter-spacing:.32em;font-size:.76rem;color:var(--gold);text-transform:uppercase}
+.place .big{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,4.4vw,2rem);margin-top:8px}
+.place .big small{font-size:.5em;font-weight:400;color:var(--muted);letter-spacing:.1em}
+.place p{color:var(--muted)}
+
+.info{text-align:center;background:linear-gradient(180deg,#1a0f07,var(--coal))}
+.phones{display:grid;gap:12px;margin:34px auto 0;max-width:30rem}
+.phone{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border:1px solid rgba(212,165,74,.55);background:rgba(28,18,9,.85);text-align:left}
+.phone span{font-family:var(--display);font-weight:700;font-size:1.2rem;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.phone .btn{font-size:.72rem;padding:10px 14px}
+.hours{margin-top:22px;color:var(--muted)}
+.share{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.toast{min-height:1.6em;margin-top:12px;color:var(--gold-hi);font-style:italic}
+
+footer{text-align:center;padding-block:56px 110px;border-top:1px solid rgba(212,165,74,.25)}
+footer .seal{width:76px;display:block;margin:0 auto 16px}
+footer .name{font-family:var(--display);font-weight:900;font-size:clamp(1.3rem,4vw,1.8rem);letter-spacing:.1em}
+footer p{margin-top:8px;font-style:italic;color:var(--muted)}
+
+/* floating song */
+.song{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.song-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:999px;border:1px solid var(--gold);background:rgba(15,9,4,.88);color:var(--gold-hi);
+  font-family:var(--display);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.5),0 0 20px rgba(255,170,70,.2)}
+.song-btn i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(180deg,#f6dc93,#b07a2c);color:#1d1004;font-style:normal;font-size:.9rem}
+.song-btn.on i{animation:beat 1.2s ease-in-out infinite}
+@keyframes beat{50%{transform:scale(1.12)}}
+.player{width:min(300px,calc(100vw - 32px));aspect-ratio:16/9;border:1px solid var(--gold);background:#000;box-shadow:0 10px 30px rgba(0,0,0,.6)}
+.player iframe{width:100%;height:100%;border:0;display:block}
+
+@media (max-width:760px){
+  .stage{grid-template-columns:1fr 1fr;padding-inline:16px;gap:12px}
+  .scene{grid-column:1/-1;grid-row:1}
+  .whisper{grid-row:2;margin-top:0;font-size:.62rem;max-width:none}
+  .whisper.l{grid-column:1;grid-row:2;justify-self:start}
+  .whisper.r{grid-column:2;grid-row:2;justify-self:end}
+  .titleblock{margin-top:-6px;order:0}
+}
+@media (max-width:560px){
+  body{font-size:1.15rem}
+  section{padding-block:60px}
+  .dates{grid-template-columns:1fr}
+  .date+.date{border-left:0;border-top:1px solid rgba(212,165,74,.6)}
+  .place>div+div{border-left:0;border-top:1px solid rgba(212,165,74,.6)}
+  .motto span+span::before{display:none}
+  .org{letter-spacing:.2em}
+  .candles{inset:auto 0 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+
+<header class="hero">
+  <div class="rays" aria-hidden="true"></div>
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <div class="topline">
+    <img class="seal" src="img/escudo.png" alt="Escudo Sanando Familias, Dimensión Vida" width="300" height="300">
+    <div class="org"><b>Dimensión Vida</b> · Diócesis de Celaya</div>
+  </div>
+  <div class="stage">
+    <figure class="scene"><img src="img/familia.jpg" alt="Una familia de rodillas, orando frente a una cruz iluminada" width="920" height="580"></figure>
+    <p class="whisper l">Señor,<br>tú ves lo que<br>callamos en casa<br>y aún así<br>nos esperas.</p>
+    <p class="whisper r">Ninguna herida<br>es demasiado vieja<br>para tu amor.</p>
+  </div>
+  <div class="titleblock">
+    <svg class="mini-cross" viewBox="0 0 20 32" aria-hidden="true"><path d="M8 0h4v9h8v4h-8v19H8V13H0V9h8z" fill="#f6dc93"/></svg>
+    <span class="script">Taller Retiro</span>
+    <h1><span class="gold-text">SANANDO</span><span class="silver-text">FAMILIAS</span></h1>
+    <svg class="swash" viewBox="0 0 400 14" aria-hidden="true"><defs><linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#d4a54a" stop-opacity="0"/><stop offset=".5" stop-color="#f6dc93"/><stop offset="1" stop-color="#d4a54a" stop-opacity="0"/></linearGradient></defs><path d="M0 7 Q100 0 200 7 T400 7" stroke="url(#sw)" stroke-width="1.6" fill="none"/><circle cx="200" cy="7" r="3" fill="#f6dc93"/></svg>
+    <div class="motto"><span>Orar</span><span>Sanar</span><span>Liberar</span><span>Renovar</span></div>
+    <p class="quote">“Cómo orar eficazmente por aquellos problemas personales y familiares inquebrantables.”</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="#informes">Quiero asistir</a>
+      <a class="btn btn-ghost" href="#fechas">Fechas y lugar</a>
+    </div>
+  </div>
+</header>
+
+<section class="chapel">
+  <div class="candles" aria-hidden="true">
+    <svg class="candle l" viewBox="0 0 60 200"><circle class="glow" cx="30" cy="40" r="30" fill="rgba(255,170,70,.25)"/><path class="flame" d="M30 14 C38 30 40 44 30 56 C20 44 22 30 30 14Z" fill="#ffcf6a"/><path class="flame" d="M30 30 C34 40 34 48 30 54 C26 48 26 40 30 30Z" fill="#fff6d6"/><rect x="18" y="58" width="24" height="142" rx="3" fill="#efe3c8"/><rect x="18" y="58" width="8" height="142" fill="#fff" opacity=".35"/></svg>
+    <svg class="candle r" viewBox="0 0 60 200"><circle class="glow" cx="30" cy="40" r="30" fill="rgba(255,170,70,.25)"/><path class="flame" d="M30 14 C38 30 40 44 30 56 C20 44 22 30 30 14Z" fill="#ffcf6a"/><path class="flame" d="M30 30 C34 40 34 48 30 54 C26 48 26 40 30 30Z" fill="#fff6d6"/><rect x="18" y="58" width="24" height="142" rx="3" fill="#efe3c8"/><rect x="18" y="58" width="8" height="142" fill="#fff" opacity=".35"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow">Para el corazón cansado</div>
+    <div class="orn" aria-hidden="true"><svg viewBox="0 0 20 32"><path d="M8 0h4v9h8v4h-8v19H8V13H0V9h8z" fill="#d4a54a"/></svg></div>
+    <blockquote style="margin-top:26px">“La mejor terapia para el corazón es doblar las rodillas y hablar con Dios.”</blockquote>
+    <p class="intro">Hay dolores en la familia que ya no sabemos cómo cargar. Este retiro es un espacio para llevarlos a Dios, con oración, acompañamiento y tiempo para ti y los tuyos.</p>
+  </div>
+</section>
+
+<section id="fechas">
+  <div class="wrap">
+    <div class="eyebrow">Dos días para sanar</div>
+    <h2 class="gold-text">Fechas del retiro</h2>
+    <div class="dates">
+      <div class="date">
+        <span class="lbl">Inicia</span>
+        <span class="day silver-text">28</span>
+        <span class="mon">Noviembre 2026</span>
+        <span class="hr">7:30 a.m.</span>
+      </div>
+      <div class="date">
+        <span class="lbl">Termina</span>
+        <span class="day silver-text">29</span>
+        <span class="mon">Noviembre 2026</span>
+        <span class="hr">5:00 p.m.</span>
+      </div>
+    </div>
+    <div class="count" id="count">
+      <div><strong id="cd">--</strong><span>Días</span></div>
+      <div><strong id="ch">--</strong><span>Horas</span></div>
+      <div><strong id="cm">--</strong><span>Min</span></div>
+    </div>
+    <p class="count-note" id="cnote">Para el inicio del retiro</p>
+  </div>
+</section>
+
+<section class="pillars">
+  <div class="wrap">
+    <div class="eyebrow">El camino</div>
+    <h2 class="gold-text">Déjate sanar</h2>
+    <div class="orn" aria-hidden="true">
+      <svg class="heart" viewBox="0 0 100 94"><path d="M50 88C20 66 4 48 4 30 4 16 15 6 28 6c10 0 18 6 22 14 4-8 12-14 22-14 13 0 24 10 24 24 0 18-16 36-46 58z" fill="#8e1f1f"/><path d="M50 20l-6 14 10 12-9 12 8 12-3 18" stroke="#2a0a0a" stroke-width="3" fill="none"/><g stroke="#f6dc93" stroke-width="2.4" stroke-linecap="round"><path d="M40 28l12 8"/><path d="M42 40l14 4"/><path d="M41 54l12-2"/><path d="M44 64l12 4"/><path d="M45 76l10-2"/></g></svg>
+    </div>
+    <div class="pil-grid">
+      <div class="pil"><h3>Orar</h3><p>Aprender a orar con fe y constancia por lo que parece no cambiar.</p></div>
+      <div class="pil"><h3>Sanar</h3><p>Dejar que Dios toque y cosa las heridas personales y familiares.</p></div>
+      <div class="pil"><h3>Liberar</h3><p>Soltar cargas, rencores y cadenas que se heredan en casa.</p></div>
+      <div class="pil"><h3>Renovar</h3><p>Volver a casa con esperanza nueva y la familia en manos de Dios.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Prepara tu maleta</div>
+    <h2 class="gold-text">¿Qué llevar?</h2>
+    <ul class="bring">
+      <li><svg viewBox="0 0 20 32" aria-hidden="true"><path d="M8 0h4v9h8v4h-8v19H8V13H0V9h8z" fill="#d4a54a"/></svg>Casa de campaña</li>
+      <li><svg viewBox="0 0 20 32" aria-hidden="true"><path d="M8 0h4v9h8v4h-8v19H8V13H0V9h8z" fill="#d4a54a"/></svg>Sleeping / cobija</li>
+      <li><svg viewBox="0 0 20 32" aria-hidden="true"><path d="M8 0h4v9h8v4h-8v19H8V13H0V9h8z" fill="#d4a54a"/></svg>Biblia y rosario</li>
+      <li><svg viewBox="0 0 20 32" aria-hidden="true"><path d="M8 0h4v9h8v4h-8v19H8V13H0V9h8z" fill="#d4a54a"/></svg>Libreta y pluma</li>
+      <li><svg viewBox="0 0 20 32" aria-hidden="true"><path d="M8 0h4v9h8v4h-8v19H8V13H0V9h8z" fill="#d4a54a"/></svg>Ropa cómoda</li>
+      <li><svg viewBox="0 0 20 32" aria-hidden="true"><path d="M8 0h4v9h8v4h-8v19H8V13H0V9h8z" fill="#d4a54a"/></svg>Artículos personales</li>
+    </ul>
+  </div>
+</section>
+
+<section class="who">
+  <div class="wrap">
+    <div class="eyebrow">Acompañan tu proceso</div>
+    <h2 class="gold-text">Impartido por</h2>
+    <div class="people">
+      <div class="person"><small>Pbro.</small><strong>Rubén Pérez</strong></div>
+      <div class="person"><small>Psicól.</small><strong>Cecilia Balderas</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="dawn">
+  <div class="wrap">
+    <div class="eyebrow">Hay esperanza</div>
+    <h2 class="gold-text">No es tarde para sanar</h2>
+    <p class="lead">Dios todavía restaura lo que en casa se rompió.</p>
+    <blockquote>“Vengan a mí todos los que están cansados y agobiados, y yo les daré descanso.”<cite>Mateo 11, 28</cite></blockquote>
+  </div>
+  <svg class="hill" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="sunG"><stop offset="0" stop-color="#fff6d8"/><stop offset=".18" stop-color="#ffd27a"/><stop offset=".5" stop-color="#ff9c3a" stop-opacity=".45"/><stop offset="1" stop-color="#ff9c3a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="pathG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd27a" stop-opacity=".8"/><stop offset="1" stop-color="#8a5a24" stop-opacity=".4"/></linearGradient>
+    </defs>
+    <circle class="sun" cx="640" cy="250" r="230" fill="url(#sunG)"/>
+    <path d="M0 300 C150 270 260 290 380 268 C470 252 540 270 600 262 C700 250 800 275 900 260 C1020 244 1110 270 1200 262 V400 H0Z" fill="#5a2a12" opacity=".75"/>
+    <path d="M0 360 C180 330 360 330 480 300 C560 282 600 238 640 236 C690 236 720 284 800 304 C920 334 1060 340 1200 352 V400 H0Z" fill="#1a0e07"/>
+    <path d="M640 250 C628 280 610 300 590 330 C575 352 560 372 540 400 L560 400 C585 370 605 345 620 322 C635 298 644 276 640 250Z" fill="url(#pathG)" opacity=".7"/>
+    <path d="M636 150h8v28h22v7h-22v53h-8v-53h-22v-7h22z" fill="#140a05"/>
+    <g class="sprout"><path d="M820 372 C820 352 822 340 826 330" stroke="#5f9a2c" stroke-width="3" fill="none"/><path d="M824 340 C806 330 798 318 800 306 C814 310 824 322 824 340Z" fill="#7fc23a"/><path d="M826 334 C840 318 854 314 864 318 C858 332 842 338 826 334Z" fill="#9ad84a"/></g>
+  </svg>
+</section>
+
+<section class="where">
+  <div class="wrap">
+    <div class="eyebrow">Te esperamos</div>
+    <h2 class="gold-text">Lugar y cooperación</h2>
+    <div class="place">
+      <div>
+        <div class="lbl">Lugar</div>
+        <div class="big">Comunidad de “El Capulín”</div>
+        <p>Dolores Hidalgo, Gto.</p>
+      </div>
+      <div>
+        <div class="lbl">Cooperación</div>
+        <div class="big">$500 <small>por persona</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info" id="informes">
+  <div class="wrap">
+    <div class="eyebrow">Informes</div>
+    <h2 class="gold-text">Reserva tu lugar</h2>
+    <div class="phones">
+      <div class="phone"><span>461 612 5402</span><a class="btn btn-gold" href="https://wa.me/524616125402?text=Hola%2C%20quiero%20informes%20del%20Taller%20Retiro%20Sanando%20Familias" target="_blank" rel="noopener">WhatsApp</a></div>
+      <div class="phone"><span>418 117 1921</span><a class="btn btn-gold" href="https://wa.me/524181171921?text=Hola%2C%20quiero%20informes%20del%20Taller%20Retiro%20Sanando%20Familias" target="_blank" rel="noopener">WhatsApp</a></div>
+      <div class="phone"><span>418 184 3141</span><a class="btn btn-gold" href="https://wa.me/524181843141?text=Hola%2C%20quiero%20informes%20del%20Taller%20Retiro%20Sanando%20Familias" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+    <p class="hours">Horario de atención: de 5:00 p.m. a 7:30 p.m.</p>
+    <div class="share">
+      <a class="btn btn-gold" id="wa-share" href="https://wa.me/" target="_blank" rel="noopener">Compartir por WhatsApp</a>
+      <button class="btn btn-ghost" id="copy" type="button">Copiar enlace</button>
+    </div>
+    <p class="toast" id="toast" role="status"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="seal" src="img/escudo.png" alt="" width="300" height="300">
+    <div class="name gold-text">Sanando Familias</div>
+    <p>Dimensión Vida · Diócesis de Celaya</p>
+    <p>Corre la voz: alguien de tu familia lo necesita.</p>
+  </div>
+</footer>
+
+<div class="song">
+  <div class="player" id="player" hidden></div>
+  <a class="song-btn" id="song" href="https://youtu.be/eK78zMyFTAQ" target="_blank" rel="noopener"><i>♪</i><span id="songlbl">Escuchar “Déjame Sanarte”</span></a>
+</div>
+
+<script>
+(function(){
+  // Countdown (Mexico central time, UTC-6)
+  var start=Date.parse('2026-11-28T07:30:00-06:00'), end=Date.parse('2026-11-29T17:00:00-06:00');
+  var d=document.getElementById('cd'),h=document.getElementById('ch'),m=document.getElementById('cm'),n=document.getElementById('cnote'),box=document.getElementById('count');
+  function tick(){
+    var now=Date.now(), diff=start-now;
+    if(now>=end){box.hidden=true;n.textContent='Gracias por ser parte de este retiro.';return;}
+    if(diff<=0){box.hidden=true;n.textContent='El retiro está en curso. Dios los bendiga.';return;}
+    var mins=Math.floor(diff/60000);
+    d.textContent=Math.floor(mins/1440);
+    h.textContent=String(Math.floor(mins%1440/60)).padStart(2,'0');
+    m.textContent=String(mins%60).padStart(2,'0');
+  }
+  tick(); setInterval(tick,30000);
+
+  // Share
+  var url=location.href.split('#')[0];
+  var txt='Te invito al Taller Retiro "Sanando Familias": 28 y 29 de noviembre de 2026 en El Capulín, Dolores Hidalgo, Gto. '+url;
+  document.getElementById('wa-share').href='https://wa.me/?text='+encodeURIComponent(txt);
+  var toast=document.getElementById('toast');
+  document.getElementById('copy').addEventListener('click',function(){
+    function ok(){toast.textContent='Enlace copiado. Compártelo con quien lo necesite.';}
+    function fail(){toast.textContent='Copia este enlace: '+url;}
+    try{navigator.clipboard.writeText(url).then(ok,fail);}catch(e){fail();}
+  });
+
+  // Song: embedded player on the invitation's own site, link out elsewhere
+  var song=document.getElementById('song'),player=document.getElementById('player'),lbl=document.getElementById('songlbl');
+  if(/(invitados\.org|github\.io)$/.test(location.hostname)){
+    song.addEventListener('click',function(e){
+      e.preventDefault();
+      if(player.hidden){
+        player.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/eK78zMyFTAQ?autoplay=1&rel=0" title="Déjame Sanarte" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+        player.hidden=false;song.classList.add('on');lbl.textContent='Cerrar canción';
+      }else{
+        player.innerHTML='';player.hidden=true;song.classList.remove('on');lbl.textContent='Escuchar “Déjame Sanarte”';
+      }
+    });
+  }
+
+  // Embers rising through the hero
+  var c=document.getElementById('embers'),x=c.getContext('2d'),W,H,P=[],dpr=Math.min(window.devicePixelRatio||1,2);
+  function size(){var r=c.getBoundingClientRect();W=r.width;H=r.height;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);}
+  size(); window.addEventListener('resize',size);
+  for(var i=0;i<70;i++)P.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.5,v:Math.random()*.0006+.00015,a:Math.random()*.7+.3,p:Math.random()*6,w:Math.random()*.6+.2});
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function draw(t){
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<P.length;i++){
+      var p=P[i]; if(!reduce){p.y-=p.v*16; if(p.y<-.03){p.y=1.03;p.x=Math.random();}}
+      var px=p.x*W+Math.sin(t/1400+p.p)*14*p.w, py=p.y*H, al=p.a*(.55+.45*Math.sin(t/300+p.p*3)), rr=p.r*4;
+      var g=x.createRadialGradient(px,py,0,px,py,rr);
+      g.addColorStop(0,'rgba(255,230,160,'+al+')');g.addColorStop(.35,'rgba(255,156,58,'+al*.7+')');g.addColorStop(1,'rgba(255,120,30,0)');
+      x.fillStyle=g;x.beginPath();x.arc(px,py,rr,0,6.283);x.fill();
+    }
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>
