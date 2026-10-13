@@ -453,7 +453,7 @@ footer p{margin-top:8px;font-style:italic;color:var(--muted)}
   audio.volume=0.4;
   audio.addEventListener('error',function(){hasMp3=false;},true);
   audio.querySelector('source').addEventListener('error',function(){hasMp3=false;});
-  function setOn(on){song.classList.toggle('on',on);lbl.textContent=on?ON:OFF;}
+  function setOn(on){song.classList.toggle('on',on);lbl.textContent=on?ON:(hasMp3?'Escuchar música':OFF);}
   function playMp3(){return audio.play().then(function(){setOn(true);},function(){hasMp3=false;});}
   function toggleYouTube(){
     if(player.hidden){
